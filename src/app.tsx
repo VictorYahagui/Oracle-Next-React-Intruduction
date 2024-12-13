@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form } from "./components/Form";
 import { Hero } from "./components/Hero";
+import { Time } from "./components/Time";
 
 interface Register {
   id: string;
@@ -13,9 +14,11 @@ interface Register {
 type Person = Register;
 
 export function App() {
+
+
   const [registers, setRegisters] = useState<Register[]>([]);
 
-  function addNewPerson(person: Person):void {
+  function addNewPerson(person: Person): void {
     setRegisters([...registers, person])
   }
 
@@ -26,6 +29,7 @@ export function App() {
       </header>
       <main className="flex flex-col items-center">
         <Form newRegister={person => addNewPerson(person)} />
+        <Time time="Front-End" name="fronttttttttttttttttttttttttttttttttttttttttt" />
       </main>
       <footer>
 
