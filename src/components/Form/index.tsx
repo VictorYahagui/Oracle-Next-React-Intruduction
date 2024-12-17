@@ -34,6 +34,13 @@ export function Form(props: FormProps) {
     const [image, setimage] = useState('');
     const [time, setTime] = useState('');
 
+    const clearStates = () => {
+        setName('');
+        setPosition('');
+        setimage('');
+        setTime('');
+    }
+
     const onSave = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         props.newRegister({
@@ -43,7 +50,7 @@ export function Form(props: FormProps) {
             image,
             time
         });
-
+        clearStates();
     }
 
     return (

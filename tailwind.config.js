@@ -8,6 +8,9 @@ export default {
     extend: {
       fontFamily: {
         sans: "sans-serif",
+      },
+      backgroundImage: {
+        'footer': "url('./src/assets/fundo.png')",
       }
     },
   },

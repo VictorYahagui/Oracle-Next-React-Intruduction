@@ -6,7 +6,6 @@ interface SelectOptionsProps {
     changed: (value: string) => void;
 }
 export function SelectOption(props: SelectOptionsProps) {
-
     function onInputChanged(event: React.ChangeEvent<HTMLSelectElement>): void {
         props.changed(event.target.value);
     }

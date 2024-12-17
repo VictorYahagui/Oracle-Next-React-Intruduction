@@ -1,3 +1,5 @@
+import { Register } from "../../app";
+import { CardPerson } from "../CardPerson";
 
 type TimeType =
     | 'Programação'
@@ -9,35 +11,46 @@ type TimeType =
     | 'Inovação e Gestão';
 
 interface TimeProps {
-    time?: string; // Permitir qualquer string temporariamente
-    name: string; // Permitir
+    time?: string;
+    registers: Register[];
 }
-
 interface ColorScheme {
     primary: string;
     secondary: string;
 }
 
 const colorMapping: Record<TimeType, ColorScheme> = {
-    'Programação': { primary: 'bg-green-200', secondary: 'border-green-500' },
-    'Front-End': { primary: 'bg-blue-200', secondary: 'border-blue-500' },
-    'Data Science': { primary: '#32CD32', secondary: '#228B22' },
-    'Devops': { primary: '#FFD700', secondary: '#FFA500' },
-    'UX e Design': { primary: '#8A2BE2', secondary: '#6A5ACD' },
-    'Mobile': { primary: '#FF1493', secondary: '#C71585' },
-    'Inovação e Gestão': { primary: '#8B4513', secondary: '#A52A2A' },
+    'Programação': { primary: 'bg-green-100', secondary: 'border-green-600' },
+    'Front-End': { primary: 'bg-blue-100', secondary: 'border-blue-600' },
+    'Data Science': { primary: 'bg-lime-100', secondary: 'border-lime-600' },
+    'Devops': { primary: 'bg-red-100', secondary: 'border-red-600' },
+    'UX e Design': { primary: 'bg-pink-100', secondary: 'border-pink-600' },
+    'Mobile': { primary: 'bg-yellow-100', secondary: 'border-yellow-600' },
+    'Inovação e Gestão': { primary: 'bg-orange-100', secondary: 'border-orange-600' },
 };
 export function Time(props: TimeProps) {
 
     const colorScheme: ColorScheme = props.time && (props.time in colorMapping)
-        ? colorMapping[props.time as TimeType]  // Garantindo que `time` é do tipo `TimeType`
+        ? colorMapping[props.time as TimeType]
         : { primary: '#808080', secondary: '#A9A9A9' };
-
     return (
-        <section className={`w-full flex flex-col justify-center items-center p-8 ${colorScheme.primary}`}>
-            <h3 className={`inline-block border-b-2 pb-2 text-black ${colorScheme.secondary}`}>
+        props.registers.length > 0 && <section className={`w-full flex flex-col gap-4 justify-center items-center p-8 ${colorScheme.primary}`}>
+            <h3 className={`inline-block border-b-2 pb-2 text-black text-xl font-semibold ${colorScheme.secondary}`}>
                 {props.time}
             </h3>
+            <div className="flex flex-wrap justify-around">
+                {props.registers.map(register => {
+                    return (
+                        <CardPerson
+                            key={register.id}
+                            colorCard={colorScheme.primary}
+                            id={register.id} name={register.name}
+                            image={register.image}
+                            position={register.position}
+                            time={register.time} />
+                    )
+                })}
+            </div>
         </section>
     )
 };
