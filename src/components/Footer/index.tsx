@@ -3,7 +3,6 @@ import fb from "@assets/fb.png"
 import ig from "@assets/ig.png"
 import tw from "@assets/tw.png"
 import logo from "@assets/logo.png"
-import fundo from "@assets/fundo.png"
 
 export function Footer() {
     return (

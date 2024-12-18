@@ -3,15 +3,7 @@ import { Button } from "../Button";
 import { InputLabel } from "./InputLabel";
 import { SelectOption } from "./selectOption";
 import { v4 as uuidv4 } from 'uuid';
-
-interface Register {
-    id: string;
-    name: string;
-    position: string;
-    image: string;
-    time: string;
-}
-
+import { Register } from "../../app";
 interface FormProps {
     newRegister: (value: Register) => void;
 }
@@ -48,7 +40,8 @@ export function Form(props: FormProps) {
             name,
             position,
             image,
-            time
+            time,
+            favorite: false,
         });
         clearStates();
     }

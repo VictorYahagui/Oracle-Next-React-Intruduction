@@ -10,6 +10,7 @@ export interface Register {
   position: string;
   image: string;
   time: string;
+  favorite: boolean;
 }
 
 type Person = Register;
@@ -21,7 +22,8 @@ const times = [
   'Devops',
   'UX e Design',
   'Mobile',
-  'Inovação e Gestão'
+  'Inovação e Gestão',
+  'novo'
 ] as const;
 type TimeType = typeof times[number];
 
@@ -34,7 +36,12 @@ export function App() {
   function addNewPerson(person: Person): void {
     setRegisters([...registers, person])
   }
-
+  function deleteRegister(id: string): void {
+    setRegisters(registers.filter((register) => register.id !== id))
+  }
+  function updateFavoritePerson(id: string): void {
+    setRegisters(registers.map((register) => register.id === id ? { ...register, favorite: !register.favorite } : register))
+  }
   return (
     <section className="w-full">
       <header >
@@ -48,6 +55,8 @@ export function App() {
               key={index}
               time={time}
               registers={registers.filter((register) => time.includes(register.time as TimeType))}
+              deleteRegister={deleteRegister}
+              favoritePerson={updateFavoritePerson}
             />
           )
         })

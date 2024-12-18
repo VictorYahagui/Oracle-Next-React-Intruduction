@@ -13,6 +13,8 @@ type TimeType =
 interface TimeProps {
     time?: string;
     registers: Register[];
+    favoritePerson: (id: string) => void;
+    deleteRegister: (id: string) => void;
 }
 interface ColorScheme {
     primary: string;
@@ -38,8 +40,10 @@ export function Time(props: TimeProps) {
             <h3 className={`inline-block border-b-2 pb-2 text-black text-xl font-semibold ${colorScheme.secondary}`}>
                 {props.time}
             </h3>
-            <div className="flex flex-wrap justify-around">
+            <div className="w-full flex flex-wrap justify-around items-center">
                 {props.registers.map(register => {
+                    console.log(register.name);
+
                     return (
                         <CardPerson
                             key={register.id}
@@ -47,7 +51,11 @@ export function Time(props: TimeProps) {
                             id={register.id} name={register.name}
                             image={register.image}
                             position={register.position}
-                            time={register.time} />
+                            time={register.time}
+                            favorite={register.favorite}
+                            favoritePerson={id => props.favoritePerson(id)}
+                            deleteRegister={id => props.deleteRegister(id)}
+                        />
                     )
                 })}
             </div>
